@@ -18,7 +18,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping
+    @GetMapping("/postList")
     public List<Post> getAllPosts(@RequestParam Optional<Long> userId) {
         return postService.getAllPosts(userId);
     }
@@ -28,8 +28,8 @@ public class PostController {
         return postService.getOnePostById(postId);
     }
 
-    @PostMapping
-    public Post createOnePost(PostCreateRequest newPostRequest) {
+    @PostMapping("/create")
+    public Post createOnePost(@RequestBody PostCreateRequest newPostRequest) {
         return postService.createOnePost(newPostRequest);
     }
 
@@ -39,7 +39,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
-    public void deleteOnePostById(Long postId) {
+    public void deleteOnePostById(@PathVariable Long postId) {
         postService.deleteById(postId);
     }
 }

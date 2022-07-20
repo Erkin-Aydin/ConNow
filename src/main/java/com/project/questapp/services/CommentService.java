@@ -32,17 +32,6 @@ public class CommentService {
             return null;
         }
     }
-    public List<Comment> getAllCommentsByUserId(Optional<Long> userId) {
-        //If such user is present, then return all of its comments. If not, return null.
-        if(!userId.isPresent()) {
-            return null;
-        }
-        else {
-           // return commentRepository.findByUserId(userId.get());
-            return null;
-        }
-    }
-
     public Comment getOneCommentById(Long commentId) {
         //If such a comment is present, then we return it. If not, we return null.
         return commentRepository.findById(commentId).orElse(null);

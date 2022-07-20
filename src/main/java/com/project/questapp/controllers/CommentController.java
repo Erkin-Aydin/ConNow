@@ -18,37 +18,29 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/getAllComments")
+    @GetMapping("/commentList")
     public List<Comment> getAllCommentsByPostId(@RequestParam Optional<Long> postId) {
-        return null;
-                //commentService.getAllCommentsByPostId(postId);
+        return commentService.getAllCommentsByPostId(postId);
     }
 
-    @GetMapping("findCommentsByUserId")
-    public List<Comment> getAllCommentsByUserId(@RequestParam Optional<Long> userId) {
-        return null;
-                //commentService.getAllCommentsByUserId(userId);
+    @GetMapping("/{commentId}")
+    public Comment getOneCommentById(@PathVariable Long commentId) {
+
+        return commentService.getOneCommentById(commentId);
     }
 
-    @GetMapping("getOnePost")
-    public Comment getOnePostById(@PathVariable Long commentId) {
-
-        return null;
-                //commentService.getOneCommentById(commentId);
-    }
-
-    @PostMapping("createComment")
-    public Comment createOneComment(CommentCreateRequest commentCreateRequest) {
+    @PostMapping("create")
+    public Comment createOneComment(@RequestBody CommentCreateRequest commentCreateRequest) {
         return commentService.createOneComment(commentCreateRequest);
     }
 
-    @PutMapping("updateComment/{commentId}")
+    @PutMapping("update/{commentId}")
     public Comment updateOneCommentById(@PathVariable Long commentId, @RequestBody CommentUpdateRequest updateRequest) {
         return commentService.updateOneCommentById(commentId, updateRequest);
     }
 
-    @DeleteMapping("deleteComment/{commentId}")
-    public void deleteOneCommentById(Long commentId) {
+    @DeleteMapping("delete/{commentId}")
+    public void deleteOneCommentById(@PathVariable Long commentId) {
         commentService.deleteOneCommentById(commentId);
     }
 }
