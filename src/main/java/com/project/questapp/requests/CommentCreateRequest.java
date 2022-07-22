@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentCreateRequest {
-    Long id;
-    Long postId;
-    Long userId;
-    String text;
+    private Long id;
+    private Long postId;
+    private Long userId;
+    private String text;
 }

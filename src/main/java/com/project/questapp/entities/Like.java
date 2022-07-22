@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Like {
 
     @Id
-    Long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY) //One post can contain many likes
     @JoinColumn(name="post_id", nullable=false) // post can't be null

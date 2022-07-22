@@ -11,17 +11,18 @@ import javax.persistence.*;
 @Table(name="post")
 @Data
 public class Post {
-    @Id
-    Long id;
-    String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Id
+    private Long id;
+    public String title;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", nullable=false) // user can't be null
     @OnDelete(action = OnDeleteAction.CASCADE) //when a user is deleted, all the posts of its are also deleted
     @JsonIgnore
-    User user;
+    public User user;
 
     @Lob
     @Column(columnDefinition="text")
-    String text;
+    public String text;
 }

@@ -1,5 +1,6 @@
 package com.project.questapp.entities;
 
+import com.project.questapp.requests.UserCreateRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +12,11 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String userName;
-    String password;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long id;
+    private String userName;
+    private String password;
+
 
 
 }

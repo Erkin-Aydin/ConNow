@@ -18,29 +18,51 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/commentList")
-    public List<Comment> getAllCommentsByPostId(@RequestParam Optional<Long> postId) {
+    /*
+    @GetMapping("/commentList/{postId}")
+    public List<Comment> getAllCommentsByPostId(@PathVariable Optional<Long> postId) {
         return commentService.getAllCommentsByPostId(postId);
     }
+    */
 
+    /**
+     *
+     * @param commentId id of the comment
+     * @return
+     */
     @GetMapping("/{commentId}")
     public Comment getOneCommentById(@PathVariable Long commentId) {
 
         return commentService.getOneCommentById(commentId);
     }
 
-    @PostMapping("create")
-    public Comment createOneComment(@RequestBody CommentCreateRequest commentCreateRequest) {
+    /**
+     * This method is used to create a comment under a post
+     * @param commentCreateRequest carries credentials of the upcoming comment.
+     * @return "Success!" if it is created successfully, a fail message with its reason if not.
+     */
+    @PostMapping("/create")
+    public String createOneComment(@RequestBody CommentCreateRequest commentCreateRequest) {
         return commentService.createOneComment(commentCreateRequest);
     }
 
-    @PutMapping("update/{commentId}")
-    public Comment updateOneCommentById(@PathVariable Long commentId, @RequestBody CommentUpdateRequest updateRequest) {
+    /**
+     * This method is used to update an existing comment.
+     * @param commentId id of the comment that will be updated.
+     * @param updateRequest new credentials of the comment.
+     * @return "Success!" if it is updated, fail message if not.
+     */
+    @PutMapping("/update/{commentId}")
+    public String updateOneCommentById(@PathVariable Long commentId, @RequestBody CommentUpdateRequest updateRequest) {
         return commentService.updateOneCommentById(commentId, updateRequest);
     }
 
-    @DeleteMapping("delete/{commentId}")
-    public void deleteOneCommentById(@PathVariable Long commentId) {
-        commentService.deleteOneCommentById(commentId);
+    /**
+     * This method is used to delete a comment.
+     * @param commentId id of the comment to be deleted
+     */
+    @DeleteMapping("/delete/{commentId}")
+    public String deleteOneCommentById(@PathVariable Long commentId) {
+        return commentService.deleteOneCommentById(commentId);
     }
 }
