@@ -1,4 +1,4 @@
-# quest-ui
+# questapp-ui
 
 ## Project setup
 ```
