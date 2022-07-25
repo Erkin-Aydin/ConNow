@@ -1,10 +1,14 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/users">Users</router-link>
-  </nav>
-  <router-view/>
+  <v-app>
+    <Navigationbar />
+    <v-toolbar-title>ConNow!</v-toolbar-title>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/users">Users</router-link>
+    </nav>
+    <router-view/>
+  </v-app>
 </template>
 
 <style>
@@ -29,3 +33,11 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
+<script>
+import NavigationBar from "@/components/NavigationBar";
+export default {
+  Components: {NavigationBar}
+}
+
+</script>
