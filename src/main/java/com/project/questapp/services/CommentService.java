@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentService {
-    //public List<Comment> getAllCommentsByPostId(Optional<Long> postId);
-    public Comment getOneCommentById(Long commentId);
+    public List<Comment> getAllCommentsByPostId(Optional<Long> postId);
+    public Optional<Comment> getOneCommentById(Long commentId);
     public String createOneComment(CommentCreateRequest newCommentRequest);
     public String updateOneCommentById(Long commentId, CommentUpdateRequest updateRequest);
     public String deleteOneCommentById(Long commentId);

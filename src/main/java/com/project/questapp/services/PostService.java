@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
-
     public List<Post> getAllPosts(Optional<Long> userId);
     public Optional<Post> getOnePostById(Long postId);
     public String createOnePost(PostCreateRequest newPostRequest);

@@ -18,20 +18,20 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    /*
+
     @GetMapping("/commentList/{postId}")
     public List<Comment> getAllCommentsByPostId(@PathVariable Optional<Long> postId) {
         return commentService.getAllCommentsByPostId(postId);
     }
-    */
+
 
     /**
-     *
+     *  Returns the comment with the @PathVariable parameter commentId. If such a comment does not exist, it returns null.
      * @param commentId id of the comment
      * @return
      */
     @GetMapping("/{commentId}")
-    public Comment getOneCommentById(@PathVariable Long commentId) {
+    public Optional<Comment> getOneCommentById(@PathVariable Long commentId) {
 
         return commentService.getOneCommentById(commentId);
     }

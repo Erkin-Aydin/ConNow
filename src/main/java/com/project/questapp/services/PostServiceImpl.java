@@ -18,14 +18,6 @@ public class PostServiceImpl implements PostService{
     @Autowired
     private UserService userService;
 
-    /*
-    //Constructor for PostService
-    public PostServiceImpl(PostRepository postRepository, UserService userService) {
-        this.postRepository = postRepository;
-        this.userService = userService;
-    }
-     */
-
     /** PROBLEM!!!
      * This method is used to return the list of posts of the user. If user does not exist, list of all posts.
      * @param userId id of the user.

@@ -24,30 +24,30 @@ public class CommentServiceImpl implements CommentService {
     private UserService userService;
 
     /**
-     * PROBLEM!!!
-     * @param postId
-     * @return
+     * Gets all the comments commented to the post with the id given through parameter postId. If no such comment exists,
+     * returns all the comments in the commentRepository.
+     * @param postId the id of the post.
+     * @return list of comments under the post. If such post does not exist, null.
      */
-    /*
-    public List<Comment> getAllCommentsByPostId(Long postId) {
-        Optional<Post> post = postService.getOnePostById(postId);
+
+
+    public List<Comment> getAllCommentsByPostId(Optional<Long> postId) {
+        Optional<Post> post = postService.getOnePostById(postId.get());
         if(!post.isPresent()) {
             return commentRepository.findAll();
         }
         else {
-           // return commentRepository.findByPostId(postId.get());
-            return null;
+            return commentRepository.findByPostId(postId.get());
         }
     }
-    */
     /**
      * This method returns the comment with the unique commentId parameter.
      * @param commentId
      * @return
      */
-    public Comment getOneCommentById(Long commentId) {
+    public Optional<Comment> getOneCommentById(Long commentId) {
         //If such a comment is present, then we return it. If not, we return null.
-        return commentRepository.findById(commentId).orElse(null);
+        return commentRepository.findById(commentId);
     }
 
     /**

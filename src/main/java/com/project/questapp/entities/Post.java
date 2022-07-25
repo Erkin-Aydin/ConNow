@@ -22,7 +22,6 @@ public class Post {
     @JsonIgnore
     public User user;
 
-    @Lob
     @Column(columnDefinition="text")
     public String text;
 }
