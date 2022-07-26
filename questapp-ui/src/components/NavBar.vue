@@ -14,25 +14,25 @@
               <p v-if="hover">My Posts</p>
             </v-btn>
           </div>
-
+          <v-breadcrumbs divider="|"></v-breadcrumbs>
           <div>
             <v-btn icon>
               <v-icon>mdi-comment</v-icon>
             </v-btn>
           </div>
-
+          <v-breadcrumbs divider="|"></v-breadcrumbs>
           <div>
             <v-btn icon>
               <v-icon>mdi-heart</v-icon>
             </v-btn>
           </div>
-
+          <v-breadcrumbs divider="|"></v-breadcrumbs>
           <div>
             <v-btn icon>
               <v-icon>mdi-contacts</v-icon>
             </v-btn>
           </div>
-
+          <v-breadcrumbs divider="|"></v-breadcrumbs>
           <div>
             <v-btn icon>
               <v-icon>mdi-dots-vertical</v-icon>
