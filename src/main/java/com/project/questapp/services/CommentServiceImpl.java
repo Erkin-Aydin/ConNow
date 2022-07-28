@@ -24,6 +24,14 @@ public class CommentServiceImpl implements CommentService {
     private UserService userService;
 
     /**
+     * Gets all the existing comments in commentRepository.
+     * @return all the existing comments in commentRepository. If no comments exist, then return an empty list.
+     */
+    public List<Comment> getAllComments() {
+        return commentRepository.findAll();
+    }
+
+    /**
      * Gets all the comments commented to the post with the id given through parameter postId. If no such comment exists,
      * returns all the comments in the commentRepository.
      * @param postId the id of the post.
@@ -114,4 +122,5 @@ public class CommentServiceImpl implements CommentService {
             return "Success";
         }
     }
+
 }

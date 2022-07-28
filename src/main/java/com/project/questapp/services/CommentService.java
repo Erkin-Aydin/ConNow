@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentService {
+    public List<Comment> getAllComments();
     public List<Comment> getAllCommentsByPostId(Optional<Long> postId);
     public Optional<Comment> getOneCommentById(Long commentId);
     public String createOneComment(CommentCreateRequest newCommentRequest);
