@@ -17,19 +17,12 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
 
-    /*
-    public LikeController(LikeService likeService) {
-        this.likeService = likeService;
-    }
-     */
 
-
-    /*
-    @GetMapping("/commentList")
-    public List<Like> getAllLikesByPostId(@RequestParam Long postId) {
-        return likeService.getAllLikesByPostId1(postId);
+    @GetMapping("/commentList/{postId}")
+    public List<Like> getAllLikesByPostId(@PathVariable Optional<Long> postId) {
+        return likeService.getAllLikesByPostId(postId);
     }
-     */
+
     @GetMapping("/{likeId}")
     public Optional<Like> getOneLikeById(@PathVariable Long likeId) {
         return likeService.getOneLikeById(likeId);

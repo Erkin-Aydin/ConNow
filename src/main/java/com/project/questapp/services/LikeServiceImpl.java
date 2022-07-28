@@ -1,5 +1,6 @@
 package com.project.questapp.services;
 
+import com.project.questapp.entities.Comment;
 import com.project.questapp.entities.Like;
 import com.project.questapp.entities.Post;
 import com.project.questapp.entities.User;
@@ -25,8 +26,24 @@ public class LikeServiceImpl implements LikeService{
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Gets all likes under a post. If such a post does not exist, then returns all existing likes.
+     * @param postId id of the post.
+     * @return all likes under the post, all existing likes if such a post does not exist.
+     */
+    public List<Like> getAllLikesByPostId(Optional<Long> postId) {
+        Optional<Post> post = postRepository.findById(postId.get());
+        if(!post.isPresent()) {
+            return likeRepository.findAll();
+        }
+        else {
+            List<Like> likes = likeRepository.findByPostId(post.get());
+            return likes;
+        }
+    }
+
     /**ProbLEMO
-     * This function is used to get all the likes associaten with a post, using the postId of that post.
+     * This function is used to get all the likes associated with a post, using the postId of that post.
      * @param likeId the id of the post that like is associated with.
      * @return List of all likes associated with the post.
     public List<Like> getAllLikesByPostId1(Long postId) {

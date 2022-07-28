@@ -1,5 +1,7 @@
 package com.project.questapp.repos;
 
+import com.project.questapp.entities.Comment;
+import com.project.questapp.entities.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.project.questapp.entities.Like;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long>{
-    /*
-    List<Like> findByPost_Id(Long postId);
-    */
+    List<Like> findByPostId(Post post);
+
 }

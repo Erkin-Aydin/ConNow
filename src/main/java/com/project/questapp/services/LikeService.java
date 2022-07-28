@@ -8,9 +8,7 @@ import java.util.Optional;
 
 public interface LikeService {
 
-    /*
-    public List<Like> getAllLikesByPostId1(Long postId);
-     */
+    public List<Like> getAllLikesByPostId(Optional<Long> postId);
     public Optional<Like> getOneLikeById(Long likeId);
     public Like createOneLike(LikeCreateRequest newLike);
     public void deleteOneLike(Long likeId);
