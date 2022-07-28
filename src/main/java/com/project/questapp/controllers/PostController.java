@@ -18,6 +18,10 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/list")
     public List<Post> getAllPosts() {
         return postService.getAllPosts();

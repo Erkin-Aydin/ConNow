@@ -37,8 +37,6 @@ public class CommentServiceImpl implements CommentService {
      * @param postId the id of the post.
      * @return list of comments under the post. If such post does not exist, null.
      */
-
-
     public List<Comment> getAllCommentsByPostId(Optional<Long> postId) {
         Optional<Post> post = postService.getOnePostById(postId.get());
         if(!post.isPresent()) {

@@ -11,6 +11,11 @@ import java.util.List;
 
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long>{
+    /**
+     *
+     * @param post
+     * @return
+     */
     List<Like> findByPostId(Post post);
 
 }

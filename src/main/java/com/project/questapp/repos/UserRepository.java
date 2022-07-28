@@ -6,5 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
+    /**
+     *
+     * @param user
+     * @return
+     */
     User save(User user);
 }

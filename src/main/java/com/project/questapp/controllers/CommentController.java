@@ -19,11 +19,20 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/list")
     public List<Comment> getAllComments() {
         return commentService.getAllComments();
     }
 
+    /**
+     *
+     * @param postId
+     * @return
+     */
     @GetMapping("/commentList/{postId}")
     public List<Comment> getAllCommentsByPostId(@PathVariable Optional<Long> postId) {
         return commentService.getAllCommentsByPostId(postId);

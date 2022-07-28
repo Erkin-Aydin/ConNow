@@ -18,6 +18,10 @@ public class PostServiceImpl implements PostService{
     @Autowired
     private UserService userService;
 
+    /**
+     *
+     * @return
+     */
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
