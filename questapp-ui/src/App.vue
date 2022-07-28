@@ -1,5 +1,15 @@
 <template>
+
   <v-app>
+    <div>
+      <ul>
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/posts">Posts</router-link></li>
+        <li><router-link to="/users">Users</router-link></li>
+        <router-view />
+      </ul>
+    </div>
+    <!--
     <v-app-bar
       app
       color="primary"
@@ -36,21 +46,21 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
+    -->
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+//import HelloWorld from './components/HelloWorld';
+//import HomeView from "@/components/HomeView";
+//import PostView from "@/components/PostView";
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+
   },
 
   data: () => ({
