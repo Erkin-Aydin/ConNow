@@ -12,9 +12,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin("*")
 public class PostController {
     @Autowired
     private PostService postService;
+
+    @GetMapping("/list")
+    public List<Post> getAllPosts() {
+        return postService.getAllPosts();
+    }
 
     /** PROBLEM!!!
      * This method is used to get all the posts posted by a user that has the unique userId parameter as id.
@@ -23,8 +29,8 @@ public class PostController {
      * it returns all the posts.
      */
     @GetMapping("/list/{userId}")
-    public List<Post> getAllPosts(@PathVariable Optional<Long> userId) {
-        return postService.getAllPosts(userId);
+    public List<Post> getAllPostsByUserId(@PathVariable Optional<Long> userId) {
+        return postService.getAllPostsByUserId(userId);
     }
 
     /**

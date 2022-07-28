@@ -18,12 +18,16 @@ public class PostServiceImpl implements PostService{
     @Autowired
     private UserService userService;
 
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+
     /** PROBLEM!!!
      * This method is used to return the list of posts of the user. If user does not exist, list of all posts.
      * @param userId id of the user.
      * @return List of posts of the user. If user does not exist, list of all posts.
      */
-    public List<Post> getAllPosts(Optional<Long> userId) {
+    public List<Post> getAllPostsByUserId(Optional<Long> userId) {
         Optional<User> user = userService.getOneUser(userId.get());
         if(!user.isPresent()) {
             return postRepository.findAll();
