@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("comment")
 public class CommentController {
@@ -28,7 +29,7 @@ public class CommentController {
     /**
      *  Returns the comment with the @PathVariable parameter commentId. If such a comment does not exist, it returns null.
      * @param commentId id of the comment
-     * @return
+     * @return comment by id.
      */
     @GetMapping("/{commentId}")
     public Optional<Comment> getOneCommentById(@PathVariable Long commentId) {

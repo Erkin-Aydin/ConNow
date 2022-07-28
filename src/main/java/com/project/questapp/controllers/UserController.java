@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -55,7 +56,7 @@ public class UserController {
      * This method updates the user with the parameter userId with the parameter updateRequest. Returns the
      * @param userId is taken as a PathVariable, the id of the user to be updated.
      * @param updateRequest as the new credentials of the user(id can't be updated!!!)
-     * @return
+     * @return "Success!" if successful, a fail message if not.
      */
     @PutMapping("/{userId}")
     public String updateOneUser(@PathVariable Long userId, @RequestBody UserUpdateRequest updateRequest) {

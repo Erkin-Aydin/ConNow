@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/posts")
 @CrossOrigin("*")
@@ -67,7 +68,7 @@ public class PostController {
 
     /**
      * Deleted the post with the given id.
-     * @param postId
+     * @param postId id of the post to be deleted
      * @return "Success!" if it is successfully deleted, "Failed: No such post exists!" if no post exists.
      */
     @DeleteMapping("/{postId}")
