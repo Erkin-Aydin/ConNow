@@ -10,10 +10,5 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>{
 
-    /**
-     *
-     * @param userId
-     * @return
-     */
     List<Post> findByUserId(Long userId);//findBy is a "kalıp", which can be combined with properties;
 }
