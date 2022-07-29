@@ -1,12 +1,9 @@
 package com.project.questapp.services;
 
-import com.project.questapp.entities.Comment;
 import com.project.questapp.entities.Like;
 import com.project.questapp.entities.Post;
 import com.project.questapp.entities.User;
 import com.project.questapp.repos.LikeRepository;
-import com.project.questapp.repos.PostRepository;
-import com.project.questapp.repos.UserRepository;
 import com.project.questapp.requests.LikeCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,23 +18,23 @@ public class LikeServiceImpl implements LikeService{
     private LikeRepository likeRepository;
 
     @Autowired
-    private PostRepository postRepository;
+    private PostService postService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     /**
      * Gets all likes under a post. If such a post does not exist, then returns all existing likes.
      * @param postId id of the post.
      * @return all likes under the post, all existing likes if such a post does not exist.
-     */
+    */
     public List<Like> getAllLikesByPostId(Optional<Long> postId) {
-        Optional<Post> post = postRepository.findById(postId.get());
+        Optional<Post> post = postService.getOnePostById(postId.get());
         if(!post.isPresent()) {
             return likeRepository.findAll();
         }
         else {
-            List<Like> likes = likeRepository.findByPostId(post.get());
+            List<Like> likes = likeRepository.findByPostId(postId.get());
             return likes;
         }
     }
@@ -61,12 +58,15 @@ public class LikeServiceImpl implements LikeService{
      * @param newLike
      * @return null if user or the post does not exist, newly created like if they exist.
      */
-    public Like createOneLike(LikeCreateRequest newLike) {
-        Optional<Post> post = postRepository.findById(newLike.getPostId());
-        Optional<User> user = userRepository.findById(newLike.getUserId());
+    public String createOneLike(LikeCreateRequest newLike) {
+        Optional<Post> post = postService.getOnePostById(newLike.getPostId());
+        Optional<User> user = userService.getOneUser(newLike.getUserId());
         //If the user or the post does not exist, then return null.
-        if(!post.isPresent() || !user.isPresent()) {
-            return null;
+        if(!post.isPresent()) {
+            return "Failed: Such a post does not exist!";
+        }
+        else if(!user.isPresent()) {
+            return "Failed: Such a user does not exist!";
         }
         //If both exist, then create the like, save is to the LikeRepository and return the like.
         else {
@@ -75,7 +75,7 @@ public class LikeServiceImpl implements LikeService{
             toSave.setUser(user.get());
             toSave.setPost(post.get());
             likeRepository.save(toSave);
-            return toSave;
+            return "Success!";
         }
     }
 
@@ -83,7 +83,14 @@ public class LikeServiceImpl implements LikeService{
      * This function is to delete a like using its id.
      * @param likeId
      */
-    public void deleteOneLike(Long likeId) {
+    public String deleteOneLike(Long likeId) {
+        Optional<Like> like = likeRepository.findById(likeId);
+        if(like.isEmpty()) {
+            return "Failed: Like does not exist!";
+        }
+        else {
             likeRepository.deleteById(likeId);
+            return "Success!";
+        }
     }
 }

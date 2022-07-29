@@ -12,8 +12,8 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 
     /**
      *
-     * @param user
+     * @param userId
      * @return
      */
-    List<Post> findByUserId(Long user);//findBy is a "kalıp", which can be combined with properties;
+    List<Post> findByUserId(Long userId);//findBy is a "kalıp", which can be combined with properties;
 }

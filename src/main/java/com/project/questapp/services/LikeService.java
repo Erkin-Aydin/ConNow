@@ -21,6 +21,6 @@ public interface LikeService {
      * @return
      */
     public Optional<Like> getOneLikeById(Long likeId);
-    public Like createOneLike(LikeCreateRequest newLike);
-    public void deleteOneLike(Long likeId);
+    public String createOneLike(LikeCreateRequest newLike);
+    public String deleteOneLike(Long likeId);
 }

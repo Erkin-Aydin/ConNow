@@ -19,15 +19,15 @@ public class PostController {
     private PostService postService;
 
     /**
-     *
-     * @return
+     * This method gets the list of all existing posts.
+     * @return List of all existing posts.
      */
     @GetMapping("/list")
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
 
-    /** PROBLEM!!!
+    /**
      * This method is used to get all the posts posted by a user that has the unique userId parameter as id.
      * @param userId id of the user that posted the posts.
      * @return list of all posts by the user. If the user with the userId does not exist, or the user did not post anything,

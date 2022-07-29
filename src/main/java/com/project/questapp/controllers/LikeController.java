@@ -17,16 +17,16 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
 
+
     /**
      *
      * @param postId
      * @return
-     */
-    @GetMapping("/commentList/{postId}")
+    */
+    @GetMapping("/likes/{postId}")
     public List<Like> getAllLikesByPostId(@PathVariable Optional<Long> postId) {
         return likeService.getAllLikesByPostId(postId);
     }
-
     /**
      *
      * @param likeId
@@ -43,7 +43,7 @@ public class LikeController {
      * @return
      */
     @PostMapping("/create")
-    public Like createOneLike(@RequestBody LikeCreateRequest newLike) {
+    public String createOneLike(@RequestBody LikeCreateRequest newLike) {
         return likeService.createOneLike(newLike);
     }
 
@@ -52,8 +52,8 @@ public class LikeController {
      * @param likeId
      */
     @DeleteMapping("/delete/{likeId}")
-    public void deleteOneLike(@PathVariable Long likeId) {
-        likeService.deleteOneLike(likeId);
+    public String deleteOneLike(@PathVariable Long likeId) {
+        return likeService.deleteOneLike(likeId);
     }
 
 }
