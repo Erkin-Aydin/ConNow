@@ -17,7 +17,6 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
 
-
     /**
      * This method is used to get all the likes under a post.
      * @param postId the id of the post.
@@ -27,6 +26,7 @@ public class LikeController {
     public List<Like> getAllLikesByPostId(@PathVariable Optional<Long> postId) {
         return likeService.getAllLikesByPostId(postId);
     }
+
     /**
      * This method gets one like by its id.
      * @param likeId id of the like to be returned.

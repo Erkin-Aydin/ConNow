@@ -20,8 +20,8 @@ public class CommentController {
     private CommentService commentService;
 
     /**
-     *
-     * @return
+     * This method gets all the comments.
+     * @return list of all comments.
      */
     @GetMapping("/list")
     public List<Comment> getAllComments() {
@@ -29,15 +29,14 @@ public class CommentController {
     }
 
     /**
-     *
-     * @param postId
-     * @return
+     * This method gets all the comments under the post with parameter postId.
+     * @param postId id of the post.
+     * @return list of all comments under the post with the parameter postId.
      */
     @GetMapping("/commentList/{postId}")
     public List<Comment> getAllCommentsByPostId(@PathVariable Optional<Long> postId) {
         return commentService.getAllCommentsByPostId(postId);
     }
-
 
     /**
      *  Returns the comment with the @PathVariable parameter commentId. If such a comment does not exist, it returns null.
