@@ -19,21 +19,21 @@ public class PostServiceImpl implements PostService{
     private UserService userService;
 
     /**
-     *
-     * @return
+     * This method gets all the posts in existence.
+     * @return list of all posts in postRepository.
      */
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
 
-    /** PROBLEM!!!
+    /**
      * This method is used to return the list of posts of the user. If user does not exist, list of all posts.
      * @param userId id of the user.
      * @return List of posts of the user. If user does not exist, list of all posts.
      */
     public List<Post> getAllPostsByUserId(Optional<Long> userId) {
         Optional<User> user = userService.getOneUser(userId.get());
-        if(!user.isPresent()) {
+        if(user.isEmpty()) {
             return postRepository.findAll();
         }
         else {
@@ -62,7 +62,7 @@ public class PostServiceImpl implements PostService{
         Optional<User> user = userService.getOneUser(newPostRequest.getUserId());
         Optional<Post> post = postRepository.findById(newPostRequest.getId());
         //If the user does not exist, then is can't post anything.
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             return "Failed: Such a user does not exist!";
         }
         else if(post.isPresent()) {
@@ -92,7 +92,7 @@ public class PostServiceImpl implements PostService{
         //Retrieving whether the post in the request actually exists.
         Optional<Post> post = postRepository.findById(postId);
         //If the post does not exist, then it can't be modified, obviously.
-        if(!post.isPresent()) {
+        if(post.isEmpty()) {
             return "Failed: No post with this id exists!";
         }
         //If it exists, we modify it, and save it to postRepository.
@@ -107,11 +107,11 @@ public class PostServiceImpl implements PostService{
 
     /**
      * Deleted the post with the given id.
-     * @param postId
+     * @param postId is of the post to be deleted
      * @return "Success!" if it is successfully deleted, "Failed: No such post exists!" if no post exists.
      */
     public String deleteById(Long postId) {
-        if(!postRepository.findById(postId).isPresent()) {
+        if(postRepository.findById(postId).isEmpty()) {
             return "Failed: No such post exists!";
         }
         else {

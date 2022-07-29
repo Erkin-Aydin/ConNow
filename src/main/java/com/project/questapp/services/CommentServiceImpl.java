@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
      */
     public List<Comment> getAllCommentsByPostId(Optional<Long> postId) {
         Optional<Post> post = postService.getOnePostById(postId.get());
-        if(!post.isPresent()) {
+        if(post.isEmpty()) {
             return commentRepository.findAll();
         }
         else {
@@ -48,8 +48,8 @@ public class CommentServiceImpl implements CommentService {
     }
     /**
      * This method returns the comment with the unique commentId parameter.
-     * @param commentId
-     * @return
+     * @param commentId id of the comment to be returned.
+     * @return the comment if it exists, null if not
      */
     public Optional<Comment> getOneCommentById(Long commentId) {
         //If such a comment is present, then we return it. If not, we return null.
@@ -65,10 +65,10 @@ public class CommentServiceImpl implements CommentService {
         Optional<User> user = userService.getOneUser(commentCreateRequest.getUserId());
         Optional<Post> post = postService.getOnePostById(commentCreateRequest.getPostId());
         //If the user to comment, or the post to be commented, does not exist, we can't create te comment.
-        if(!user.isPresent()) {
+        if(user.isEmpty()) {
             return "Failed: User does not exist!";
         }
-        else if(!post.isPresent()) {
+        else if(post.isEmpty()) {
             return "Failed: Post does not exist!";
         }
         else if(commentRepository.findById(commentCreateRequest.getId()).isPresent()) {
@@ -94,7 +94,7 @@ public class CommentServiceImpl implements CommentService {
      */
     public String updateOneCommentById(Long commentId, CommentUpdateRequest updateRequest) {
         Optional<Comment> comment = commentRepository.findById(commentId);
-        if(!comment.isPresent()) {
+        if(comment.isEmpty()) {
             return "Failed: The comment is not present!";
         }
         //If it exists, we update it.
@@ -112,7 +112,7 @@ public class CommentServiceImpl implements CommentService {
      * @return "Success" if successful, "Failed: No such comment exists!" if no comment found with the id.
      */
     public String deleteOneCommentById(Long commentId) {
-        if(!commentRepository.findById(commentId).isPresent()) {
+        if(commentRepository.findById(commentId).isEmpty()) {
             return "Failed: No such comment exists!";
         }
         else {

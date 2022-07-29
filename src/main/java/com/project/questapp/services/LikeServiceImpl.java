@@ -30,7 +30,7 @@ public class LikeServiceImpl implements LikeService{
     */
     public List<Like> getAllLikesByPostId(Optional<Long> postId) {
         Optional<Post> post = postService.getOnePostById(postId.get());
-        if(!post.isPresent()) {
+        if(post.isEmpty()) {
             return likeRepository.findAll();
         }
         else {
@@ -59,10 +59,10 @@ public class LikeServiceImpl implements LikeService{
         Optional<Post> post = postService.getOnePostById(newLike.getPostId());
         Optional<User> user = userService.getOneUser(newLike.getUserId());
         //If the user or the post does not exist, then return a fail message with relevant context.
-        if(!post.isPresent()) {
+        if(post.isEmpty()) {
             return "Failed: Such a post does not exist!";
         }
-        else if(!user.isPresent()) {
+        else if(user.isEmpty()) {
             return "Failed: Such a user does not exist!";
         }
         //If both exist, then create the like, save is to the LikeRepository and return the like.

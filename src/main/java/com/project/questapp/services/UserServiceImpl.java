@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
         //Finding the user in the userRepository with the given userId
         Optional<User> user = userRepository.findById(userId);
         //If the user with the giver userId is not present, then we can't update is as it does not exist.
-        if(!user.isPresent()) {
+        if(user.isEmpty()) {
             return "Failed: User with the given id does not exist!";
         }
         //If the user is present, we update it, save it to the repository and return it.
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService{
      * if the user exists but can't be deleted.
      */
     public String deleteById(Long userId) {
-        if(!userRepository.findById(userId).isPresent()) {
+        if(userRepository.findById(userId).isEmpty()) {
             return "Failed: User with the given id does not exist!";
         }
         userRepository.deleteById(userId);
