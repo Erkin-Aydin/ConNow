@@ -39,13 +39,10 @@ public class LikeServiceImpl implements LikeService{
         }
     }
 
-    /**ProbLEMO
-     * This function is used to get all the likes associated with a post, using the postId of that post.
-     * @param likeId the id of the post that like is associated with.
-     * @return List of all likes associated with the post.
-    public List<Like> getAllLikesByPostId1(Long postId) {
-        return likeRepository.findByPost_Id(postId);
-    }
+    /**
+     * This method gets one like by its id.
+     * @param likeId id of the like to be returned.
+     * @return the like, if it exists. If it doesn't, then null
      */
     public Optional<Like> getOneLikeById(Long likeId) {
         return likeRepository.findById(likeId);
@@ -61,7 +58,7 @@ public class LikeServiceImpl implements LikeService{
     public String createOneLike(LikeCreateRequest newLike) {
         Optional<Post> post = postService.getOnePostById(newLike.getPostId());
         Optional<User> user = userService.getOneUser(newLike.getUserId());
-        //If the user or the post does not exist, then return null.
+        //If the user or the post does not exist, then return a fail message with relevant context.
         if(!post.isPresent()) {
             return "Failed: Such a post does not exist!";
         }
