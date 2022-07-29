@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostCreateRequest {
 
-    Long id;
-    String text;
-    String title;
-    Long userId;
+    private Long id;
+    private String text;
+    private String title;
+    private Long userId;
 
 }
