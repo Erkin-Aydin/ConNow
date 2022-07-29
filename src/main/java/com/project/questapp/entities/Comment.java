@@ -13,8 +13,8 @@ import javax.persistence.*;
 @Data
 public class Comment {
 
-    @Id    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY) //One post can contain many comments
