@@ -1,7 +1,9 @@
 <template>
-  <div id="axios-get">
+  <div id="axios-get" style="background-color: azure">
     <ul>
-      <li v-for="user in users" :key="user.id">{{ user.userName }} | {{ user.password }}</li>
+      <li v-for="user in users" :key="user.id" style="background-color: antiquewhite">
+        <hr> Username: <strong>{{ user.userName }}</strong> <br> Password: {{ user.password }}<hr>
+      </li>
     </ul>
     <ul v-if="errors && errors.length">
       <li v-for="(error, index) of errors" :key="index">

@@ -1,7 +1,12 @@
 <template>
-  <div id="axios-get">
+  <div id="axios-get" style="background-color: azure">
     <ul>
-      <li v-for="comment in comments" :key="comment.id">{{ comment.text }}</li>
+      <li v-for="comment in comments" :key="comment.id">
+        <hr>
+          <b-button pill variant="outline-danger"><v-icon>mdi-heart</v-icon></b-button>
+          <i>{{ comment.text }}</i>
+        <hr>
+      </li>
     </ul>
     <ul v-if="errors && errors.length">
       <li v-for="(error, index) of errors" :key="index">
