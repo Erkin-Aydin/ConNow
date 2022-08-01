@@ -5,7 +5,10 @@
         <hr><strong>{{ post.title }}</strong><br>{{ post.text }}
           <v-spacer>
             <v-btn color="red"><v-icon>mdi-heart</v-icon></v-btn>
-            <v-btn color="blue"><v-icon>mdi-comment</v-icon></v-btn>
+            <v-btn @click="clicked = !clicked" color="blue"><v-icon>mdi-comment</v-icon></v-btn>
+          </v-spacer>
+          <v-spacer v-show="clicked">
+            sessss<!--To Be Changed. -->
           </v-spacer>
         <hr>
         <!--
