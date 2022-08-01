@@ -4,8 +4,8 @@
       <li v-for="post in posts" :key="post.id" style="background-color: antiquewhite">
         <hr><strong>{{ post.title }}</strong><br>{{ post.text }}
           <v-spacer>
-            <b-button pill variant="outline-danger"><v-icon>mdi-heart</v-icon></b-button>
-            <b-button pill variant="outline-danger"><v-icon>mdi-comment</v-icon></b-button>
+            <v-btn color="red"><v-icon>mdi-heart</v-icon></v-btn>
+            <v-btn color="blue"><v-icon>mdi-comment</v-icon></v-btn>
           </v-spacer>
         <hr>
         <!--

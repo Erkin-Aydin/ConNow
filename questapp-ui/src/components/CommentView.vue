@@ -3,7 +3,7 @@
     <ul>
       <li v-for="comment in comments" :key="comment.id">
         <hr>
-          <b-button pill variant="outline-danger"><v-icon>mdi-heart</v-icon></b-button>
+          <v-btn color="red"><v-icon>mdi-heart</v-icon></v-btn>
           <i>{{ comment.text }}</i>
         <hr>
       </li>
