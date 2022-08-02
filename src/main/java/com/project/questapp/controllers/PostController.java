@@ -56,8 +56,10 @@ public class PostController {
      * @return the user of the post.
      */
     @GetMapping("/user")
-    public Optional<User> getUserByPost(@RequestBody UserGetRequest postId) {
-        return postService.getUserByPost(postId);
+    public String getUserByPost(@RequestParam Long postId) {
+        UserGetRequest request = new UserGetRequest();
+        request.setPostId(postId);
+        return postService.getUserByPost(request).get().getUserName();
     }
 
     /**

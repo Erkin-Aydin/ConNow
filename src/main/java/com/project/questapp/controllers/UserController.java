@@ -4,6 +4,7 @@ import com.project.questapp.entities.User;
 import com.project.questapp.repos.UserRepository;
 import com.project.questapp.requests.UserCreateRequest;
 import com.project.questapp.requests.UserUpdateRequest;
+import com.project.questapp.responses.UserResponse;
 import com.project.questapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,15 @@ public class UserController {
      * @return List of users in the repository.
      */
     @GetMapping("/list")
-    public List<User> getAllUsers() {
-       return userService.getAllUsers();
+    public UserResponse[] getAllUsers() {
+       List<User> users = userService.getAllUsers();
+       UserResponse[] userResponses = new UserResponse[users.size()];
+       for(int i = 0; i < users.size(); i++) {
+           UserResponse newUserResponse = new UserResponse();
+           newUserResponse.setUserName(users.get(i).getUserName());
+           userResponses[i] = newUserResponse;
+       }
+       return userResponses;
     }
 
     /**

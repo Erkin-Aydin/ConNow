@@ -3,6 +3,7 @@ package com.project.questapp.entities;
 import com.project.questapp.requests.UserCreateRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +18,5 @@ public class User {
     private Long id;
     private String userName;
     private String password;
-
 
 }

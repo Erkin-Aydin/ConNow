@@ -3,6 +3,7 @@ package com.project.questapp.services;
 import com.project.questapp.entities.User;
 import com.project.questapp.requests.UserCreateRequest;
 import com.project.questapp.requests.UserUpdateRequest;
+import com.project.questapp.responses.UserResponse;
 
 import java.util.List;
 import java.util.Optional;

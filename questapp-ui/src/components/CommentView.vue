@@ -2,10 +2,12 @@
   <div id="axios-get" style="background-color: azure">
     <ul>
       <li v-for="comment in comments" :key="comment.id">
-        <hr>
+        <v-card>
+          <hr>
+          <v-card-text>{{ comment.text }}</v-card-text>
           <v-btn color="red"><v-icon>mdi-heart</v-icon></v-btn>
-          <i>{{ comment.text }}</i>
-        <hr>
+          <hr>
+        </v-card>
       </li>
     </ul>
     <ul v-if="errors && errors.length">
