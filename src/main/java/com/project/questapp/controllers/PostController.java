@@ -1,8 +1,10 @@
 package com.project.questapp.controllers;
 
 import com.project.questapp.entities.Post;
+import com.project.questapp.entities.User;
 import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
+import com.project.questapp.requests.UserGetRequest;
 import com.project.questapp.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,16 @@ public class PostController {
     @GetMapping("/{postId}")
     public Optional<Post> getOnePostById(@PathVariable Long postId) {
         return postService.getOnePostById(postId);
+    }
+
+    /**
+     * This method gets the user of a post.
+     * @param postId id of the post
+     * @return the user of the post.
+     */
+    @GetMapping("/user")
+    public Optional<User> getUserByPost(@RequestBody UserGetRequest postId) {
+        return postService.getUserByPost(postId);
     }
 
     /**

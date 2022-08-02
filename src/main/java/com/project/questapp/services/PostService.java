@@ -1,8 +1,10 @@
 package com.project.questapp.services;
 
 import com.project.questapp.entities.Post;
+import com.project.questapp.entities.User;
 import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
+import com.project.questapp.requests.UserGetRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,4 +53,6 @@ public interface PostService {
      * @return list of all posts in existence.
      */
     List<Post> getAllPosts();
+
+    Optional<User> getUserByPost(UserGetRequest postId);
 }

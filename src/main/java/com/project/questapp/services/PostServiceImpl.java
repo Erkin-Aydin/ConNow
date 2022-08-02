@@ -5,6 +5,7 @@ import com.project.questapp.entities.User;
 import com.project.questapp.repos.PostRepository;
 import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
+import com.project.questapp.requests.UserGetRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,15 @@ public class PostServiceImpl implements PostService{
      */
     public Optional<Post> getOnePostById(Long postId) {
         return postRepository.findById(postId);
+    }
+
+    /**
+     * This method gets the user of a post.
+     * @param postId id of the post
+     * @return the user of the post.
+     */
+    public Optional<User> getUserByPost(UserGetRequest postId) {
+        return userService.getOneUser(postRepository.getReferenceById(postId.getPostId()).getUser().getId());
     }
 
     /**

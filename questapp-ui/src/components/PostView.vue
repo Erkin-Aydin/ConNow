@@ -2,14 +2,11 @@
   <div id="axios-get" style="background-color: azure">
     <ul>
       <li v-for="post in posts" :key="post.id" style="background-color: antiquewhite">
-        <hr><strong>{{ post.title }}</strong><br>{{ post.text }}
-          <v-spacer>
-            <v-btn color="red"><v-icon>mdi-heart</v-icon></v-btn>
-            <v-btn @click="clicked = !clicked" color="blue"><v-icon>mdi-comment</v-icon></v-btn>
-          </v-spacer>
-          <v-spacer v-show="clicked">
-            sessss<!--To Be Changed. -->
-          </v-spacer>
+        <v-card>
+          <v-card-title>{{ post.title }}</v-card-title>
+          <v-card-subtitle>{{ post.get }}</v-card-subtitle>
+          <v-card-text>{{ post.text }}</v-card-text>
+        </v-card>
         <hr>
         <!--
 
@@ -39,7 +36,8 @@ export default {
   data() {
     return {
       posts: [],
-      errors: []
+      errors: [],
+      users: []
     }
   },
   methods: {
