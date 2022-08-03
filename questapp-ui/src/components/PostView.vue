@@ -4,11 +4,28 @@
       <li v-for="post in posts" :key="post.id" style="background-color: antiquewhite">
         <v-card>
           <v-card-title>{{ post.title }}</v-card-title>
-          <v-card-subtitle><strong>{{ post.user.userName }}</strong></v-card-subtitle>
+          <v-card-subtitle><strong>{{ post.userResponse.userName }}</strong></v-card-subtitle>
           <v-card-text>{{ post.text }}</v-card-text>
           <v-card-actions>
-            <v-btn class="like" color="error"><v-icon>mdi-heart</v-icon></v-btn>
-            <v-btn class="display" color="primary" @click="getAllCommentsByPostId(post.id)"><v-icon>mdi-comment</v-icon></v-btn>
+            <div width="200">
+              <v-btn x-small class="like" ><v-icon>mdi-chevron-up</v-icon></v-btn>
+              <v-btn x-small class="like" ><v-icon>mdi-chevron-down</v-icon></v-btn>
+            </div>
+            <v-expansion-panels accordion focusable inset style="color: azure" >
+              <v-expansion-panel>
+                <v-expansion-panel-header style="width: 200px">
+                <span><v-btn small class="display" color="primary"><v-icon>mdi-comment</v-icon></v-btn> Comments</span>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content :style="{  'align-items' : left }">
+                  <v-list v-for="(comment, index) in post.commentResponseList" :key="comment.text + index">
+                    <v-list-item>
+                          <span><v-list-item-title>{{ comment.userName }}</v-list-item-title></span>
+                          <v-list-item-action-text style="margin-left: 20px">{{ comment.text }}</v-list-item-action-text>
+                    </v-list-item>
+                  </v-list>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-card-actions>
         </v-card>
       </li>
@@ -37,7 +54,8 @@ export default {
       posts: [],
       errors: [],
       users: [],
-      comments: []
+      comments: [],
+      display: false,
     }
   },
   methods: {

@@ -22,9 +22,6 @@
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld';
-//import HomeView from "@/components/HomeView";
-//import PostView from "@/components/PostView";
 
 export default {
   name: 'App',

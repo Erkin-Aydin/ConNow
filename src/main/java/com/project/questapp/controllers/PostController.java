@@ -1,14 +1,11 @@
 package com.project.questapp.controllers;
 
-import com.project.questapp.entities.Comment;
 import com.project.questapp.entities.Post;
-import com.project.questapp.entities.User;
 import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
 import com.project.questapp.requests.UserGetRequest;
 import com.project.questapp.responses.PostResponse;
 import com.project.questapp.responses.UserResponse;
-import com.project.questapp.services.CommentService;
 import com.project.questapp.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +26,7 @@ public class PostController {
     private CommentController commentController;
 
     /**
-     * This method gets the list of all existing posts.
+     * This method gets the list of all existing posts along with their comments.
      * @return List of all existing posts.
      */
     @GetMapping("/list")
