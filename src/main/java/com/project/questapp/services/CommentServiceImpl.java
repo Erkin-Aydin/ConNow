@@ -6,6 +6,7 @@ import com.project.questapp.entities.User;
 import com.project.questapp.repos.CommentRepository;
 import com.project.questapp.requests.CommentCreateRequest;
 import com.project.questapp.requests.CommentUpdateRequest;
+import com.project.questapp.responses.CommentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,13 +38,13 @@ public class CommentServiceImpl implements CommentService {
      * @param postId the id of the post.
      * @return list of comments under the post. If such post does not exist, null.
      */
-    public List<Comment> getAllCommentsByPostId(Optional<Long> postId) {
-        Optional<Post> post = postService.getOnePostById(postId.get());
+    public List<Comment> getAllCommentsByPostId(Long postId) {
+        Optional<Post> post = postService.getOnePostById(postId);
         if(post.isEmpty()) {
             return commentRepository.findAll();
         }
         else {
-            return commentRepository.findByPostId(postId.get());
+            return commentRepository.findByPostId(postId);
         }
     }
     /**

@@ -1,15 +1,14 @@
 <template>
   <div id="axios-get" style="background-color: azure">
     <ul>
-      <li v-for="(post, index) in posts" :key="post.id" style="background-color: antiquewhite">
+      <li v-for="post in posts" :key="post.id" style="background-color: antiquewhite">
         <v-card>
           <v-card-title>{{ post.title }}</v-card-title>
-          <v-card-subtitle>{{ getUserNameByPost(post.id) }}</v-card-subtitle>
+          <v-card-subtitle><strong>{{ post.user.userName }}</strong></v-card-subtitle>
           <v-card-text>{{ post.text }}</v-card-text>
           <v-card-actions>
             <v-btn class="like" color="error"><v-icon>mdi-heart</v-icon></v-btn>
-            <v-btn class="display" color="primary" @click="isClicked[index] = !isClicked[index]"><v-icon>mdi-comment</v-icon></v-btn>
-            <!--<v-card v-if="isClicked[index]">{{ getAllCommentsByPostId(post.id) }}</v-card>-->
+            <v-btn class="display" color="primary" @click="getAllCommentsByPostId(post.id)"><v-icon>mdi-comment</v-icon></v-btn>
           </v-card-actions>
         </v-card>
       </li>
@@ -53,6 +52,7 @@ export default {
     getUserNameByPost(postId) {
       return axios
           .get("http://localhost:8080/posts/user?postId=" + postId)
+          .then(response => console.log(response))
           .catch(error => {
             this.errors.push(error);
           });

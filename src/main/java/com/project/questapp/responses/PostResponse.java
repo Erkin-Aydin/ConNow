@@ -9,6 +9,6 @@ import java.util.List;
 public class PostResponse {
     private String title;
     private String text;
-    private String userName;
-    private List<Comment> commentList;
+    private UserResponse userResponse;
+    private List<CommentResponse> commentResponseList;
 }

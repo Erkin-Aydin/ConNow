@@ -19,7 +19,6 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", nullable=false) // user can't be null
     @OnDelete(action = OnDeleteAction.CASCADE) //when a user is deleted, all the posts of its are also deleted
-    @JsonIgnore
     public User user;
 
     @Column(columnDefinition="text")

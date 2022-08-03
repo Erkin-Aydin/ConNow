@@ -3,6 +3,7 @@ package com.project.questapp.services;
 import com.project.questapp.entities.Comment;
 import com.project.questapp.requests.CommentCreateRequest;
 import com.project.questapp.requests.CommentUpdateRequest;
+import com.project.questapp.responses.CommentResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public interface CommentService {
      * @param postId id of the post.
      * @return list of all comments under the post with parameter postId.
      */
-    List<Comment> getAllCommentsByPostId(Optional<Long> postId);
+    List<Comment> getAllCommentsByPostId(Long postId);
 
     /**
      * This method gets the comment with parameter commentId.

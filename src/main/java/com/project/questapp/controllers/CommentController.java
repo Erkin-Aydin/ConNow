@@ -3,12 +3,14 @@ package com.project.questapp.controllers;
 import com.project.questapp.entities.Comment;
 import com.project.questapp.requests.CommentCreateRequest;
 import com.project.questapp.requests.CommentUpdateRequest;
+import com.project.questapp.responses.CommentResponse;
 import com.project.questapp.services.CommentService;
 import com.project.questapp.services.PostService;
 import com.project.questapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +36,18 @@ public class CommentController {
      * @return list of all comments under the post with the parameter postId.
      */
     @GetMapping("/commentList/{postId}")
-    public List<Comment> getAllCommentsByPostId(@PathVariable Optional<Long> postId) {
-        return commentService.getAllCommentsByPostId(postId);
+    public List<CommentResponse> getAllCommentsByPostId(@PathVariable Long postId) {
+        List<Comment> commentList = commentService.getAllCommentsByPostId(postId);
+        List<CommentResponse> commentResponseList = new ArrayList<>();
+        for(Comment comment : commentList) {
+            CommentResponse responseToSave = new CommentResponse();
+            //Setting userName.
+            responseToSave.setUserName(comment.getUser().getUserName());
+            //Setting title.
+            responseToSave.setText(comment.getText());
+            commentResponseList.add(responseToSave);
+        }
+        return commentResponseList;
     }
 
     /**

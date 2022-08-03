@@ -1,14 +1,19 @@
 package com.project.questapp.controllers;
 
+import com.project.questapp.entities.Comment;
 import com.project.questapp.entities.Post;
 import com.project.questapp.entities.User;
 import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
 import com.project.questapp.requests.UserGetRequest;
+import com.project.questapp.responses.PostResponse;
+import com.project.questapp.responses.UserResponse;
+import com.project.questapp.services.CommentService;
 import com.project.questapp.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +25,32 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private CommentController commentController;
+
     /**
      * This method gets the list of all existing posts.
      * @return List of all existing posts.
      */
     @GetMapping("/list")
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    public List<PostResponse> getAllPosts() {
+        List<Post> posts = postService.getAllPosts();
+        List<PostResponse> responseList = new ArrayList<>();
+        for(Post post : posts) {
+            PostResponse responseToSave = new PostResponse();
+            //Setting text.
+            responseToSave.setText(post.getText());
+            //Setting title.
+            responseToSave.setTitle(post.getTitle());
+            //Setting userResponse
+            UserResponse userResponse = new UserResponse();
+            userResponse.setUserName(post.getUser().getUserName());
+            responseToSave.setUserResponse(userResponse);
+            //Setting commentResponseList
+            responseToSave.setCommentResponseList(commentController.getAllCommentsByPostId(post.getId()));
+            responseList.add(responseToSave);
+        }
+        return responseList;
     }
 
     /**
