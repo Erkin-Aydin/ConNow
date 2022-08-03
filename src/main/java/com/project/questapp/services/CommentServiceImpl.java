@@ -63,6 +63,7 @@ public class CommentServiceImpl implements CommentService {
      * @return "Success!" if it is created successfully, a fail message with its reason if not.
      */
     public String createOneComment(CommentCreateRequest commentCreateRequest) {
+
         Optional<User> user = userService.getOneUser(commentCreateRequest.getUserId());
         Optional<Post> post = postService.getOnePostById(commentCreateRequest.getPostId());
         //If the user to comment, or the post to be commented, does not exist, we can't create te comment.

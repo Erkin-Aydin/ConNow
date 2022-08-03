@@ -38,6 +38,7 @@ public class CommentController {
     @GetMapping("/commentList/{postId}")
     public List<CommentResponse> getAllCommentsByPostId(@PathVariable Long postId) {
         List<Comment> commentList = commentService.getAllCommentsByPostId(postId);
+
         List<CommentResponse> commentResponseList = new ArrayList<>();
         for(Comment comment : commentList) {
             CommentResponse responseToSave = new CommentResponse();
@@ -47,6 +48,7 @@ public class CommentController {
             responseToSave.setText(comment.getText());
             commentResponseList.add(responseToSave);
         }
+
         return commentResponseList;
     }
 
