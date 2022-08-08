@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
      * @return "Success" or "Failed: User with the given id already exists." in String format.
      */
     public String createUser(UserCreateRequest createRequest) {
-        Optional<User> user = userRepository.findById(createRequest.getId());
+        Optional<User> user = userRepository.findByEmail(createRequest.getEmail());
         //If user with the id exists, then we can't create...
         if(user.isPresent()) {
             return "Failed: User with the given id already exists!";
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
         //if it does not exist, we create is, save it, and return "Success".
         else {
             User toSave = new User();
-            toSave.setId(createRequest.getId());
+            toSave.setEmail(createRequest.getEmail());
             toSave.setUserName(createRequest.getUserName());
             toSave.setPassword(createRequest.getPassword());
             userRepository.save(toSave);

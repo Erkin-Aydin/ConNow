@@ -4,6 +4,7 @@ import Comment from "../components/CommentView";
 import Post from "../components/PostView";
 import User from "../components/UserView";
 import Login from "@/components/LoginView";
+import CreateAccount from "@/components/CreateAccountView";
 import Vue from "vue";
 //import Vue from "vue/types/index";
 
@@ -11,6 +12,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {path: '/login', component: Login},
+    {path: '/account', component: CreateAccount},
     {path: '/', component: Home},
     {path: '/comment', component: Comment},
     {path: '/posts', component: Post},

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserCreateRequest {
 
-    private Long id;
+    private String email;
     private String userName;
     private String password;
 }

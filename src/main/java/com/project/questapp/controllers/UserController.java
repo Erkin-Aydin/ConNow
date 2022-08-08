@@ -27,6 +27,7 @@ public class UserController {
      */
     @GetMapping("/list")
     public UserResponse[] getAllUsers() {
+        //return userService.getAllUsers();
        List<User> users = userService.getAllUsers();
        UserResponse[] userResponses = new UserResponse[users.size()];
        for(int i = 0; i < users.size(); i++) {
