@@ -2,6 +2,8 @@
   <div>
     <v-alert dense dismissible type="success" v-if="isSuccessful"
     style="width: 15%">Account Created Successfully!</v-alert>
+    <v-alert dense dismissible type="error" v-if="displayError"
+             style="width: 15%">Can't create this account!</v-alert>
     <v-card style="width: 20%; margin-left: 40%; margin-top: 10%">
         <div style="text-align: center; padding-left: 10%; padding-right: 10%; padding-top: 10%">
           <div>
@@ -58,6 +60,7 @@ export default {
       userName: '',
       email: '',
       isSuccessful: false,
+      displayError: false,
       rules: {
         required: value => !!value || 'Required.',
         counter: value => value.length >= 5 || 'Min 5 characters',
@@ -78,14 +81,15 @@ export default {
           .then((response) => {
             console.log(response)
             this.isSuccessful = true;
-            setTimeout(() => this.isSuccessful = false, 2500)
-            router.push('/login')
-          }).catch(
-
-      ).finally(
+            setTimeout(() => this.isSuccessful = false, 2300)
+            setTimeout(() => router.push('/login'), 2500)
+          }).catch(() => {
+            console.log("Failed!")
+            this.displayError = true;
+            setTimeout(() => this.displayError = false, 2300)
+          }).finally(
 
       )
-
     }
   }
 }

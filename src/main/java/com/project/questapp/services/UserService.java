@@ -19,9 +19,8 @@ public interface UserService {
     /**
      * This method creates a user using the credentials of parameter createRequest
      * @param createRequest carries the credentials of new user.
-     * @return "Success!" if the user is created successfully, a fail message if not with relevant context.
      */
-    String createUser(UserCreateRequest createRequest);
+    void createUser(UserCreateRequest createRequest) throws Exception;
 
     /**
      * This method gets one user using the parameter userId

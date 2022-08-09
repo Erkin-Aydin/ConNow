@@ -1,17 +1,17 @@
 package com.project.questapp.controllers;
 
+import com.project.questapp.common.ApiResponse;
 import com.project.questapp.entities.User;
-import com.project.questapp.repos.UserRepository;
 import com.project.questapp.requests.UserCreateRequest;
 import com.project.questapp.requests.UserUpdateRequest;
 import com.project.questapp.responses.UserResponse;
 import com.project.questapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Entity;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -39,15 +39,27 @@ public class UserController {
     }
 
     /**
-     * This method will create a user with the given user information through createRequest. It returns "Success" if such
+     * This method will create a user with the given user information through createRequest. It returns "Success!" if such
      * a user with incoming createRequest.getId() does not exist in te system and creates a user with these credentials.
      * Returns "Failed: User with the given id already exists." otherwise.
+     *
      * @param createRequest is the user information of the incoming user
      * @return newUser
      */
     @PostMapping("/create")
-    public String createUser(@RequestBody UserCreateRequest createRequest) {
-        return userService.createUser(createRequest);
+    public ResponseEntity createUser(@RequestBody UserCreateRequest createRequest) {
+
+        try {
+            userService.createUser(createRequest);
+
+            ApiResponse apiResponse = new ApiResponse("Success!", true);
+            return new ResponseEntity(apiResponse,HttpStatus.OK);
+        } catch (Exception e) {
+            ApiResponse apiResponse = new ApiResponse("Failed!", false);
+            return new ResponseEntity(apiResponse,HttpStatus.CONFLICT);
+        }
+
+
     }
 
     /**
