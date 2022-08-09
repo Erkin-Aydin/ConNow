@@ -9,7 +9,9 @@
                   label="E-mail"
                   append-outer-icon="mdi-email"
                   :rules="[rules.required, rules.email]"
-                  clearable></v-text-field>
+                  clearable>
+                <input type="email" class="form-control" v-model="email">
+              </v-text-field>
             </v-form>
           </div>
           <div>
@@ -18,7 +20,9 @@
                   label="Username"
                   append-outer-icon="mdi-account"
                   :rules="[rules.required, rules.username]"
-                  clearable></v-text-field>
+                  clearable>
+                <input type="text" class="form-control" v-model="userName">
+              </v-text-field>
             </v-form>
           </div>
           <div>
@@ -27,7 +31,9 @@
                   label="Password"
                   append-outer-icon="mdi-key"
                   :rules="[rules.required, rules.counter]"
-                  clearable></v-text-field>
+                  clearable>
+                <input type="password" class="form-control" v-model="password">
+              </v-text-field>
             </v-form>
           </div>
           <div>
@@ -43,7 +49,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "CreateAccountView",
@@ -54,8 +60,10 @@ export default {
   },
   data() {
     return {
-      password: 'Password',
+      password: '',
+      userName: '',
       email: '',
+      isSuccessful: false,
       rules: {
         required: value => !!value || 'Required.',
         counter: value => value.length >= 5 || 'Min 5 characters',
@@ -68,9 +76,14 @@ export default {
     }
   },
   methods: {
-    createUser(userCreateRequest) {
+    createUser() {
       axios
-        .post("http://localhost:8080/users/create", )
+          .post("http://localhost:8080/users/create",
+            {email: this.email, userName: this.userName, password: this.password}
+          )
+          .then((response) => {
+            this.isSuccessful = true;
+            console.log(response) })
     }
   }
 }
