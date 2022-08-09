@@ -2,7 +2,7 @@
   <v-app>
     <div style="background-color: peru; text-align: center">
       <router />
-      <b-nav tabs>
+      <div>
         <b-nav-item>
           <router-link to="/account">Create Account</router-link> |
         </b-nav-item>
@@ -21,7 +21,7 @@
         <b-nav-item>
           <router-link to="/users">Users</router-link>
         </b-nav-item>
-      </b-nav>
+      </div>
     </div>
     <router-view />
   </v-app>

@@ -1,62 +1,56 @@
 <template>
   <div>
+    <v-alert dense dismissible type="success" v-if="isSuccessful"
+    style="width: 15%">Account Created Successfully!</v-alert>
     <v-card style="width: 20%; margin-left: 40%; margin-top: 10%">
-      <v-input>
-        <div style="text-align: center; margin-left: 20%">
+        <div style="text-align: center; padding-left: 10%; padding-right: 10%; padding-top: 10%">
           <div>
-            <v-form>
-              <v-text-field
-                  label="E-mail"
-                  append-outer-icon="mdi-email"
-                  :rules="[rules.required, rules.email]"
-                  clearable>
-                <input type="email" class="form-control" v-model="email">
-              </v-text-field>
-            </v-form>
-          </div>
-          <div>
-            <v-form>
-              <v-text-field
-                  label="Username"
-                  append-outer-icon="mdi-account"
-                  :rules="[rules.required, rules.username]"
-                  clearable>
-                <input type="text" class="form-control" v-model="userName">
-              </v-text-field>
-            </v-form>
-          </div>
-          <div>
-            <v-form>
-              <v-text-field
-                  label="Password"
-                  append-outer-icon="mdi-key"
-                  :rules="[rules.required, rules.counter]"
-                  clearable>
-                <input type="password" class="form-control" v-model="password">
-              </v-text-field>
-            </v-form>
-          </div>
-          <div>
-            <v-btn><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
-          </div>
-          <div>
+            <v-form @submit.prevent="createUser">
+                <v-text-field
+                    label="E-mail"
+                    type="email"
+                    append-outer-icon="mdi-email"
+                    :rules="[rules.required, rules.email]"
+                    clearable
+                    v-model="email">
+                </v-text-field>
+                <v-text-field
+                    label="Username"
+                    type="text"
+                    append-outer-icon="mdi-account"
+                    :rules="[rules.required, rules.username]"
+                    clearable
+                    v-model="userName">
+                </v-text-field>
+                <v-text-field
+                    label="Password"
+                    type="password"
+                    append-outer-icon="mdi-key"
+                    :rules="[rules.required, rules.counter]"
+                    clearable
+                    v-model="password">
+                </v-text-field>
+              <v-btn type="submit"><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
+          </v-form>
+          <div style="padding-top: 4%; padding-bottom: 4%">
             <router-link to="/login">Already have an account?</router-link>
           </div>
         </div>
-      </v-input>
+        </div>
     </v-card>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "CreateAccountView",
   components: {},
 
   created() {
-    this.createUser();
+    //this.createUser();
   },
   data() {
     return {
@@ -82,8 +76,16 @@ export default {
             {email: this.email, userName: this.userName, password: this.password}
           )
           .then((response) => {
+            console.log(response)
             this.isSuccessful = true;
-            console.log(response) })
+            setTimeout(() => this.isSuccessful = false, 2500)
+            router.push('/login')
+          }).catch(
+
+      ).finally(
+
+      )
+
     }
   }
 }
