@@ -7,10 +7,10 @@
           <router-link to="/account">Create Account</router-link> |
         </b-nav-item>
         <b-nav-item>
-          <router-link to="/login">Login</router-link> |
+          <router-link to="/">Login</router-link> |
         </b-nav-item>
         <b-nav-item>
-          <router-link to="/">Home</router-link> |
+          <router-link to="/home">Home</router-link> |
         </b-nav-item>
         <b-nav-item>
           <router-link to="/comment">Comments</router-link> |

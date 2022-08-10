@@ -11,9 +11,9 @@ import Vue from "vue";
 Vue.use(VueRouter)
 
 const routes = [
-    {path: '/login', component: Login},
+    {path: '/', component: Login},
     {path: '/account', component: CreateAccount},
-    {path: '/', component: Home},
+    {path: '/home', component: Home},
     {path: '/comment', component: Comment},
     {path: '/posts', component: Post},
     {path: '/users', component: User}
