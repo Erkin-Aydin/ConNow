@@ -34,7 +34,7 @@
             <router-link to="/account">Create an account</router-link>
           </div>
           <div>
-            <router-link to="/password">Forgot your password?</router-link>
+            <router-link to="/passwordChange">Forgot your password?</router-link>
           </div>
         </div>
       </v-input>

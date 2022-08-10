@@ -43,4 +43,6 @@ public interface UserService {
      * @return "Success!" if the user is deleted successfully, a fail message with relevant context if not.
      */
     String deleteById(Long userId);
+
+    Optional<User> doesUserExist(String email);
 }

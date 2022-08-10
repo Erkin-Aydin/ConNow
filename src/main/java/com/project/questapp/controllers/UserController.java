@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -71,6 +72,16 @@ public class UserController {
     public User getOneUser(@PathVariable Long userId) {
         //custom exception
         return userService.getOneUser(userId).orElse(null);
+    }
+
+    /**
+     * Checks whether a user exists through its email
+     * @param email email of the user to be found
+     * @return true if the user exists, false if not.
+     */
+    @GetMapping("/{email}")
+    public boolean doesUserExist(@PathVariable String email) {
+        return userService.doesUserExist(email) != null;
     }
 
     /**

@@ -55,6 +55,10 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(userId);
     }
 
+    public Optional<User> doesUserExist(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     /**
      * This method is to update the credentials of a user with the parameter userId.
      * @param userId as the id of the user to be updated.
