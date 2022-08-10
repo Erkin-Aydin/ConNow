@@ -3,12 +3,14 @@
     <div style="background-color: peru; text-align: center">
       <router />
       <div>
+        <!--
         <b-nav-item>
           <router-link to="/account">Create Account</router-link> |
         </b-nav-item>
         <b-nav-item>
           <router-link to="/">Login</router-link> |
         </b-nav-item>
+        -->
         <b-nav-item>
           <router-link to="/home">Home</router-link> |
         </b-nav-item>

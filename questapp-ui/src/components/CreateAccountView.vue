@@ -35,7 +35,7 @@
               <v-btn type="submit"><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
           </v-form>
           <div style="padding-top: 4%; padding-bottom: 4%">
-            <router-link to="/login">Already have an account?</router-link>
+            <router-link to="/">Already have an account?</router-link>
           </div>
         </div>
         </div>
