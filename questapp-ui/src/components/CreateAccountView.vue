@@ -82,7 +82,7 @@ export default {
             console.log(response)
             this.isSuccessful = true;
             setTimeout(() => this.isSuccessful = false, 2300)
-            setTimeout(() => router.push('/login'), 2500)
+            setTimeout(() => router.push('/'), 2500)
           }).catch(() => {
             console.log("Failed!")
             this.displayError = true;
