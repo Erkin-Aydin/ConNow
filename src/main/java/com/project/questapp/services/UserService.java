@@ -2,6 +2,7 @@ package com.project.questapp.services;
 
 import com.project.questapp.entities.User;
 import com.project.questapp.requests.UserCreateRequest;
+import com.project.questapp.requests.UserPasswordUpdateRequest;
 import com.project.questapp.requests.UserUpdateRequest;
 import com.project.questapp.responses.UserResponse;
 
@@ -35,7 +36,7 @@ public interface UserService {
      * @param updateRequest carries new credentials of the user
      * @return "Success!" if the user is updated successfully, a fail message with relevant context if not.
      */
-    String updateOneUser(Long userId, UserUpdateRequest updateRequest);
+    String updateOneUser(String email, UserUpdateRequest updateRequest);
 
     /**
      * This method deleted the user with parameter userId.
@@ -45,4 +46,8 @@ public interface UserService {
     String deleteById(Long userId);
 
     Optional<User> doesUserExist(String email);
+
+    Optional<User> getOneUserThroughEmail(String email);
+
+    void updatePassword(UserPasswordUpdateRequest passwordUpdateRequest);
 }

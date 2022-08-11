@@ -3,8 +3,7 @@ package com.project.questapp.requests;
 import lombok.Data;
 
 @Data
-public class UserUpdateRequest {
+public class UserCheckPasswordRequest {
     private String email;
-    private String userName;
     private String password;
 }

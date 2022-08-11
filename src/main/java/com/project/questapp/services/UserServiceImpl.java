@@ -3,6 +3,7 @@ package com.project.questapp.services;
 import com.project.questapp.entities.User;
 import com.project.questapp.repos.UserRepository;
 import com.project.questapp.requests.UserCreateRequest;
+import com.project.questapp.requests.UserPasswordUpdateRequest;
 import com.project.questapp.requests.UserUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,20 +56,24 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(userId);
     }
 
+    public Optional<User> getOneUserThroughEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public Optional<User> doesUserExist(String email) {
         return userRepository.findByEmail(email);
     }
 
     /**
      * This method is to update the credentials of a user with the parameter userId.
-     * @param userId as the id of the user to be updated.
+     * @param email as the id of the user to be updated.
      * @param updateRequest as the new user info that will replace the current one with the given userId.
      * @return "Failed: User with the given id does not exist!" if no user is present with the parameter userId,
      * "Success!" if the user is found with the parameter userId.
      */
-    public String updateOneUser(Long userId, UserUpdateRequest updateRequest) {
+    public String updateOneUser(String email, UserUpdateRequest updateRequest) {
         //Finding the user in the userRepository with the given userId
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findByEmail(email);
         //If the user with the giver userId is not present, then we can't update is as it does not exist.
         if(user.isEmpty()) {
             return "Failed: User with the given id does not exist!";
@@ -76,10 +81,20 @@ public class UserServiceImpl implements UserService{
         //If the user is present, we update it, save it to the repository and return it.
         else {
             User foundUser = user.get();
+            foundUser.setEmail(updateRequest.getEmail());
             foundUser.setUserName(updateRequest.getUserName());
             foundUser.setPassword(updateRequest.getPassword());
             userRepository.save(foundUser);
             return "Success!";
+        }
+    }
+
+    public void updatePassword(UserPasswordUpdateRequest passwordUpdateRequest) {
+        Optional<User> user = userRepository.findByEmail(passwordUpdateRequest.getEmail());
+        if(user.isPresent()) {
+            User foundUser = user.get();
+            foundUser.setPassword(passwordUpdateRequest.getPassword());
+            userRepository.save(foundUser);
         }
     }
 

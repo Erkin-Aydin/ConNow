@@ -2,7 +2,9 @@ package com.project.questapp.controllers;
 
 import com.project.questapp.common.ApiResponse;
 import com.project.questapp.entities.User;
+import com.project.questapp.requests.UserCheckPasswordRequest;
 import com.project.questapp.requests.UserCreateRequest;
+import com.project.questapp.requests.UserPasswordUpdateRequest;
 import com.project.questapp.requests.UserUpdateRequest;
 import com.project.questapp.responses.UserResponse;
 import com.project.questapp.services.UserService;
@@ -74,6 +76,11 @@ public class UserController {
         return userService.getOneUser(userId).orElse(null);
     }
 
+    @GetMapping("getThroughMail/{email}")
+    public Optional<User> getOneUserThroughEmail(@PathVariable String email) {
+        return userService.getOneUserThroughEmail(email);
+    }
+
     /**
      * Checks whether a user exists through its email
      * @param email email of the user to be found
@@ -86,13 +93,32 @@ public class UserController {
 
     /**
      * This method updates the user with the parameter userId with the parameter updateRequest. Returns the
-     * @param userId is taken as a PathVariable, the id of the user to be updated.
+     * @param email is taken as a PathVariable, the email of the user to be updated.
      * @param updateRequest as the new credentials of the user(id can't be updated!!!)
      * @return "Success!" if successful, a fail message if not.
      */
-    @PutMapping("/{userId}")
-    public String updateOneUser(@PathVariable Long userId, @RequestBody UserUpdateRequest updateRequest) {
-        return userService.updateOneUser(userId, updateRequest);
+    @PutMapping("/{email}")
+    public String updateOneUser(@PathVariable String email, @RequestBody UserUpdateRequest updateRequest) {
+        return userService.updateOneUser(email, updateRequest);
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping("/checkPassword")
+    public boolean checkPassword(@RequestBody UserCheckPasswordRequest request) {
+        return userService.getOneUserThroughEmail(request.getEmail()).get().getPassword().equals(request.getPassword());
+    }
+
+    @PutMapping("/passwordChange")
+    public boolean updatePassword(@RequestBody UserPasswordUpdateRequest passwordUpdateRequest) {
+        String email = passwordUpdateRequest.getEmail();
+        String password = passwordUpdateRequest.getPassword();
+        userService.updatePassword(passwordUpdateRequest);
+        Optional<User> user = getOneUserThroughEmail(email);
+        return user.get().getPassword().equals(password);
     }
 
     /**
