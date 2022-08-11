@@ -79,7 +79,7 @@ public class UserController {
      * @param email email of the user to be found
      * @return true if the user exists, false if not.
      */
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public boolean doesUserExist(@PathVariable String email) {
         return userService.doesUserExist(email) != null;
     }
