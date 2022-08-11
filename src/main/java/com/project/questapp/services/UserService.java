@@ -45,7 +45,7 @@ public interface UserService {
      */
     String deleteById(Long userId);
 
-    Optional<User> doesUserExist(String email);
+    boolean doesUserExist(String email);
 
     Optional<User> getOneUserThroughEmail(String email);
 

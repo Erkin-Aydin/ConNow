@@ -2,8 +2,8 @@
   <div>
     <v-alert dense dismissible type="success" v-if="displayAccountFound"
              style="width: 15%">Account Found!</v-alert>
-    <v-alert dense dismissible type="error" v-if="!curPasswordValid"
-             style="width: 15%">Current Password Not Correct!</v-alert>
+    <v-alert dense dismissible type="error" v-if="displayAccountNotFound"
+             style="width: 15%">Account Not Found!</v-alert>
     <div v-if="!found">
       <v-card style="width: 20%; margin-left: 40%; margin-top: 10%">
         <div style="text-align: center; padding-left: 10%; padding-right: 10%; padding-top: 10%">
@@ -30,14 +30,6 @@
           <div>
             <h4>Let us help you to change your password!</h4>
             <v-form @submit.prevent="passwordChangeProcess">
-              <v-text-field
-                  label="Current Password"
-                  type="password"
-                  append-outer-icon="mdi-key"
-                  :rules="[rules.required, rules.counter]"
-                  clearable
-                  v-model="curPassword">
-              </v-text-field>
               <v-text-field
                   label="New Password"
                   type="password"
@@ -67,9 +59,7 @@
                   disabled
                   type="submit"
                   style="padding-top: 5%; padding-bottom: 5%"
-                  v-if="!(newPasswordRepeat === newPassword)
-                      || newPassword.length < 5
-                      || newPasswordRepeat.length < 5"><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
+                  v-else><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
             </v-form>
           </div>
         </div>
@@ -92,12 +82,14 @@ export default {
       newPasswordRepeat: '',
       found: false,
       displayAccountFound: false,
+      displayAccountNotFound: false,
       emailVerified: false,
       passwordChanged: false,
       userPassword: '',
       curPasswordValid: true,
       rules: {
         required: value => !!value || 'Required.',
+        counter: value => value.length >= 5 || 'Min 5 characters',
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
@@ -111,20 +103,28 @@ export default {
           .get("http://localhost:8080/users/email/" + this.email)
           .then((response) => {
             console.log(response)
-            this.found = response
-            this.emailVerified = this.found
-            this.displayAccountFound = this.found
-            if(this.found) {
+            this.found = response.data
+            console.log(this.found)
+            if(!this.found) {
+              this.displayAccountNotFound = true
+              setTimeout(() => this.displayAccountNotFound = false ,2000)
+            }
+            else {
+              this.emailVerified = true
+              this.displayAccountFound = true
               setTimeout(() => this.displayAccountFound = false, 2000)
             }
           })
     },
     passwordChangeProcess() {
+      /*
+      {
+                        method: "GET",
+                        data: { email: this.email, password: this.curPassword }
+                    }
+       */
       axios
-          .get("http://localhost:8080/users/checkPassword", {
-            email: this.email,
-            password: this.curPassword
-          })
+          .get("http://localhost:8080/users/checkPassword", { email: this.email, password: this.curPassword })
           .then((response) => {
             this.curPasswordValid = response
 

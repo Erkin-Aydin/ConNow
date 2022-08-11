@@ -61,8 +61,6 @@ public class UserController {
             ApiResponse apiResponse = new ApiResponse("Failed!", false);
             return new ResponseEntity(apiResponse,HttpStatus.CONFLICT);
         }
-
-
     }
 
     /**
@@ -88,7 +86,7 @@ public class UserController {
      */
     @GetMapping("/email/{email}")
     public boolean doesUserExist(@PathVariable String email) {
-        return userService.doesUserExist(email) != null;
+        return userService.doesUserExist(email);
     }
 
     /**
