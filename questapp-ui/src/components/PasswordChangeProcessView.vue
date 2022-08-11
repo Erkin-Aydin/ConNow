@@ -4,28 +4,54 @@
              style="width: 15%">Account Found!</v-alert>
     <v-alert dense dismissible type="error" v-if="displayAccountNotFound"
              style="width: 15%">Account Not Found!</v-alert>
-    <div v-if="!found">
+    <div>
       <v-card style="width: 20%; margin-left: 40%; margin-top: 10%">
         <div style="text-align: center; padding-left: 10%; padding-right: 10%; padding-top: 10%">
           <div>
             <h4>Let us help you to change your password!</h4>
-            <v-form @submit.prevent="passwordChangeRequest">
+            <v-form @submit.prevent="passwordChangeProcess">
               <v-text-field
-                  label="E-mail"
-                  type="email"
-                  append-outer-icon="mdi-email"
-                  :rules="[rules.required, rules.email]"
+                  label="New Password"
+                  type="password"
+                  append-outer-icon="mdi-key"
+                  :rules="[rules.required, rules.counter]"
                   clearable
-                  v-model="email">
+                  v-model="newPassword">
               </v-text-field>
-              <v-btn type="submit"><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
+              <v-text-field
+                  label="New Password"
+                  type="password"
+                  append-outer-icon="mdi-key"
+                  :rules="[rules.required, rules.counter]"
+                  clearable
+                  v-model="newPassword">
+              </v-text-field>
+              <v-text-field
+                  label="New Password Again"
+                  type="password"
+                  append-outer-icon="mdi-key"
+                  :rules="[rules.required, rules.counter]"
+                  clearable
+                  v-model="newPasswordRepeat">
+              </v-text-field>
+              <div
+                  v-if="!(newPassword === newPasswordRepeat)"
+                  style="color: red; padding-bottom: 5%">Passwords do not match!</div>
+              <v-btn
+                  type="submit"
+                  style="padding-top: 5%; padding-bottom: 5%"
+                  v-if="(newPasswordRepeat === newPassword)
+                      && newPassword.length >= 5
+                      && newPasswordRepeat.length >= 5"><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
+              <v-btn
+                  disabled
+                  type="submit"
+                  style="padding-top: 5%; padding-bottom: 5%"
+                  v-else><v-icon>mdi-card-account-details-outline</v-icon>Create!</v-btn>
             </v-form>
           </div>
         </div>
       </v-card>
-    </div>
-    <div v-if="emailVerified">
-      <p>An email has been sent. click the link there and continue.</p>
     </div>
   </div>
 </template>
@@ -74,11 +100,6 @@ export default {
             else {
               this.emailVerified = true
               this.displayAccountFound = true
-              axios.post("http://localhost:8080/sendMail", {
-                recipient: this.email,
-                messageBody: "Bu Bir Maildir",
-                subject: "Bu Bir Başlıktır"
-              })
               setTimeout(() => this.displayAccountFound = false, 2000)
             }
           })
@@ -96,22 +117,22 @@ export default {
             this.curPasswordValid = response
 
           })
-          if(this.curPasswordValid){
-            setTimeout(() => this.curPasswordValid = true, 2000)
-          }
-          else {
-            axios
-                .put("http://localhost:8080/users/passwordChange/",
-                    {email: this.email, password: this.newPassword})
-                .then((response) => {
-                  console.log(response)
-                  this.passwordChanged = response
-                  if(this.passwordChanged) {
-                    setTimeout(() => this.passwordChanged = false, 2000)
-                    setTimeout(() => router.push('/'), 2100)
-                  }
-                })
-          }
+      if(this.curPasswordValid){
+        setTimeout(() => this.curPasswordValid = true, 2000)
+      }
+      else {
+        axios
+            .put("http://localhost:8080/users/passwordChange/",
+                {email: this.email, password: this.newPassword})
+            .then((response) => {
+              console.log(response)
+              this.passwordChanged = response
+              if(this.passwordChanged) {
+                setTimeout(() => this.passwordChanged = false, 2000)
+                setTimeout(() => router.push('/'), 2100)
+              }
+            })
+      }
     }
   }
 }
