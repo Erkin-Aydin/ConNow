@@ -26,13 +26,13 @@
     </div>
     <div v-if="emailVerified">
       <p>An email has been sent. click the link there and continue.</p>
+      <p>Please close this page.</p>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import router from "@/router";
 
 export default {
   name: "PasswordChangeView",
@@ -76,43 +76,17 @@ export default {
               this.displayAccountFound = true
               axios.post("http://localhost:8080/sendMail", {
                 recipient: this.email,
-                messageBody: "Bu Bir Maildir",
-                subject: "Bu Bir Başlıktır"
+                //messageBody: "http://localhost:8081/#/passwordChangeProcess",
+                messageBody: "Please click the link below to change your password:<br>"
+                    + "<h3><a href=\"http://localhost:8081/#/passwordChangeProcess\" target=\"_self\">Change</a></h3>"
+                    + "Thank you,<br>"
+                    + "ConNow!.",
+                subject: "Password Change Request"
               })
               setTimeout(() => this.displayAccountFound = false, 2000)
             }
           })
     },
-    passwordChangeProcess() {
-      /*
-      {
-                        method: "GET",
-                        data: { email: this.email, password: this.curPassword }
-                    }
-       */
-      axios
-          .get("http://localhost:8080/users/checkPassword", { email: this.email, password: this.curPassword })
-          .then((response) => {
-            this.curPasswordValid = response
-
-          })
-          if(this.curPasswordValid){
-            setTimeout(() => this.curPasswordValid = true, 2000)
-          }
-          else {
-            axios
-                .put("http://localhost:8080/users/passwordChange/",
-                    {email: this.email, password: this.newPassword})
-                .then((response) => {
-                  console.log(response)
-                  this.passwordChanged = response
-                  if(this.passwordChanged) {
-                    setTimeout(() => this.passwordChanged = false, 2000)
-                    setTimeout(() => router.push('/'), 2100)
-                  }
-                })
-          }
-    }
   }
 }
 </script>
