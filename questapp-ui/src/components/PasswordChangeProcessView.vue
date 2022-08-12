@@ -1,5 +1,7 @@
 <template>
   <div>
+    <v-alert dense dismissible type="success" v-if="passwordChanged"
+             style="width: 15%">Password Changed!</v-alert>
     <v-card style="width: 20%; margin-left: 40%; margin-top: 10%">
       <div style="text-align: center; padding-left: 10%; padding-right: 10%; padding-top: 10%">
         <div>
@@ -90,7 +92,7 @@ export default {
                 {email: this.email, password: this.newPassword})
             .then((response) => {
               console.log(response)
-              this.passwordChanged = response
+              this.passwordChanged = response.data
               if(this.passwordChanged) {
                 setTimeout(() => this.passwordChanged = false, 2000)
                 setTimeout(() => router.push('/'), 2100)

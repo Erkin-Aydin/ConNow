@@ -77,9 +77,9 @@ export default {
               axios.post("http://localhost:8080/sendMail", {
                 recipient: this.email,
                 //messageBody: "http://localhost:8081/#/passwordChangeProcess",
-                messageBody: "Please click the link below to change your password:<br>"
-                    + "<h3><a href=\"http://localhost:8081/#/passwordChangeProcess\" target=\"_self\">Change</a></h3>"
-                    + "Thank you,<br>"
+                messageBody: "Please click the link below to change your password:\n"
+                    + "http://localhost:8081/#/passwordChangeProcess \n"
+                    + "Thank you, \n"
                     + "ConNow!.",
                 subject: "Password Change Request"
               })
