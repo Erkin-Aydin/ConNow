@@ -35,7 +35,7 @@ public class UserController {
        UserResponse[] userResponses = new UserResponse[users.size()];
        for(int i = 0; i < users.size(); i++) {
            UserResponse newUserResponse = new UserResponse();
-           newUserResponse.setUserName(users.get(i).getUserName());
+           newUserResponse.setUserName(users.get(i).getUsername());
            userResponses[i] = newUserResponse;
        }
        return userResponses;

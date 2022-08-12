@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
         else {
             User toSave = new User();
             toSave.setEmail(createRequest.getEmail());
-            toSave.setUserName(createRequest.getUserName());
+            toSave.setUsername(createRequest.getUserName());
             toSave.setPassword(createRequest.getPassword());
             userRepository.save(toSave);
         }
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
         else {
             User foundUser = user.get();
             foundUser.setEmail(updateRequest.getEmail());
-            foundUser.setUserName(updateRequest.getUserName());
+            foundUser.setUsername(updateRequest.getUserName());
             foundUser.setPassword(updateRequest.getPassword());
             userRepository.save(foundUser);
             return "Success!";

@@ -41,7 +41,7 @@ public class PostController {
             responseToSave.setTitle(post.getTitle());
             //Setting userResponse
             UserResponse userResponse = new UserResponse();
-            userResponse.setUserName(post.getUser().getUserName());
+            userResponse.setUserName(post.getUser().getUsername());
             responseToSave.setUserResponse(userResponse);
             //Setting commentResponseList
             responseToSave.setCommentResponseList(commentController.getAllCommentsByPostId(post.getId()));
@@ -80,7 +80,7 @@ public class PostController {
     public String getUserByPost(@RequestParam Long postId) {
         UserGetRequest request = new UserGetRequest();
         request.setPostId(postId);
-        return postService.getUserByPost(request).get().getUserName();
+        return postService.getUserByPost(request).get().getUsername();
     }
 
     /**

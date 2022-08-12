@@ -5,8 +5,6 @@ import com.project.questapp.requests.CommentCreateRequest;
 import com.project.questapp.requests.CommentUpdateRequest;
 import com.project.questapp.responses.CommentResponse;
 import com.project.questapp.services.CommentService;
-import com.project.questapp.services.PostService;
-import com.project.questapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +41,7 @@ public class CommentController {
         for(Comment comment : commentList) {
             CommentResponse responseToSave = new CommentResponse();
             //Setting userName.
-            responseToSave.setUserName(comment.getUser().getUserName());
+            responseToSave.setUserName(comment.getUser().getUsername());
             //Setting title.
             responseToSave.setText(comment.getText());
             commentResponseList.add(responseToSave);
