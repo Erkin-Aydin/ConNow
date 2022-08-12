@@ -6,12 +6,14 @@ import User from "../components/UserView";
 import Login from "@/components/LoginView";
 import CreateAccount from "@/components/CreateAccountView";
 import PasswordChange from "@/components/PasswordChangeView";
+import PasswordChangeProcess from "@/components/PasswordChangeProcessView";
 import Vue from "vue";
 //import Vue from "vue/types/index";
 
 Vue.use(VueRouter)
 
 const routes = [
+    {path: '/passwordChangeProcess', component: PasswordChangeProcess},
     {path: '/passwordChange', component: PasswordChange},
     {path: '/', component: Login},
     {path: '/account', component: CreateAccount},

@@ -4,12 +4,14 @@ package com.project.questapp.controllers;
 import com.project.questapp.email.EmailDetails;
 import com.project.questapp.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 // Annotation
 @RestController
+@CrossOrigin//OR Post 403 Error
 // Class
 public class EmailController {
 
